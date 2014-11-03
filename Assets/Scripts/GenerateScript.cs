@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GenerateScript : MonoBehaviour {
 
-	public GameObject rocks;
+	public GameObject pipes;
 	
 	// Use this for initialization
 	void Start()
@@ -13,6 +13,8 @@ public class GenerateScript : MonoBehaviour {
 	
 	void CreateObstacle()
 	{
-		Instantiate(rocks);
+		//This creates and destroys the pipes after 5 seconds
+		GameObject clone = (GameObject)Instantiate (pipes, transform.position, Quaternion.identity);
+		Destroy (clone, 5.0f);
 	}
 }
