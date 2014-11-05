@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour {
 
 	//The force that is added when the player jumps.
 	public Vector2 jumpForce = new Vector2(0, 300);
+	bool gravityOn = false;
+
+
 
 	// Update is called once per frame
 	void Update () 
@@ -14,6 +17,13 @@ public class PlayerController : MonoBehaviour {
 		{
 			rigidbody2D.velocity = Vector2.zero;
 			rigidbody2D.AddForce (jumpForce);
+
+			if(!gravityOn){
+				gravityOn = true;
+				rigidbody2D.gravityScale = 1f;
+			}
+
+
 		}
 
 		//die from falling off screen

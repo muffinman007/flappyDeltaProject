@@ -8,7 +8,7 @@ public class GenerateScript : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		InvokeRepeating("CreateObstacle", 1f, 1f);
+		InvokeRepeating("CreateObstacle", 1f , 1f);
 	}
 	
 	void CreateObstacle()
