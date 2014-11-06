@@ -8,13 +8,14 @@ public class GenerateScript : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		InvokeRepeating("CreateObstacle", 1f , 1f);
+		InvokeRepeating("CreateObstacle", (1f * (45 * Time.deltaTime)) , (1.5f * (45 * Time.deltaTime)));
 	}
 	
 	void CreateObstacle()
 	{
-		//This creates and destroys the pipes after 5 seconds
-		GameObject clone = (GameObject)Instantiate (pipes, transform.position, Quaternion.identity);
-		Destroy (clone, 5.0f);
+		//This creates and destroys the pipes after 2 seconds
+		float y = Random.Range (0.6f, 1.2f);
+		GameObject clone = (GameObject)Instantiate (pipes, transform.position + new Vector3(0, y ,0), Quaternion.identity);
+		Destroy (clone, (2.0f + (45 * Time.deltaTime)));
 	}
 }
