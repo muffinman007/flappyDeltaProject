@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class GenerateScript : MonoBehaviour {
 
-	public GameObject pipes;
+	//public GameObject pipes;
 	
 	// Use this for initialization
 	void Start()
@@ -17,7 +18,8 @@ public class GenerateScript : MonoBehaviour {
 		// edit code: create function should not have the ablity to destory object
 		// instead add collision detection to object for destruction.
 		float y = Random.Range (0.6f, 1.2f);
-		GameObject clone = (GameObject)Instantiate (pipes, transform.position + new Vector3(0, y ,0), Quaternion.identity);
+		Object aBook = AssetDatabase.LoadAssetAtPath("Assets/prefabs/Books.prefab", typeof(GameObject));
+		Instantiate (aBook, transform.position + new Vector3(0, y ,0), Quaternion.identity);
 		//Destroy (clone, (2.0f + (45 * Time.deltaTime)));
 	}
 }

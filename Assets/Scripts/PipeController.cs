@@ -15,7 +15,7 @@ public class PipeController : MonoBehaviour {
 	// Destory self after going off the screen and colliding with DestructDetector
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.name == "DestructDetector")
-			Destroy(this);
+			Destroy(gameObject);
 	}
 
 
