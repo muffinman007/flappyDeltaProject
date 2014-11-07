@@ -19,7 +19,7 @@ public class GameOver : MonoBehaviour {
 			        		 "Game Over\nCongratulation!",
 			        		 skin.GetStyle("gameOver"));
 
-			GUI.Label(new Rect(camera.pixelWidth/10, camera.pixelHeight/2,
+			GUI.Label(new Rect(camera.pixelWidth/12, camera.pixelHeight/2,
 			                   camera.pixelWidth - (camera.pixelWidth/10)*1.7f,
 			                   camera.pixelHeight - (camera.pixelHeight/10)*1.7f),
 					           "Here is your diploma from the CBT college.\nwith the total unit of\n" +
