@@ -3,11 +3,19 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	public int Unit{ get; private set; }
+
 	//The force that is added when the player jumps.
-	public Vector2 jumpForce = new Vector2(0, 300);
+	Vector2 jumpForce = new Vector2(0, 305);
 	bool gravityOn = false;
 
+	float gravity = 1.58f;
 
+	bool isGeneratingBookToken = false;
+
+	void Start(){
+		Unit = 0;
+	}
 
 	// Update is called once per frame
 	void Update () 
@@ -20,7 +28,12 @@ public class PlayerController : MonoBehaviour {
 
 			if(!gravityOn){
 				gravityOn = true;
-				rigidbody2D.gravityScale = 1f;
+				rigidbody2D.gravityScale = gravity;
+			}
+
+			if(!isGeneratingBookToken){
+				isGeneratingBookToken = true;
+				Instantiate(Resources.Load<GameObject>("GenerateBooksAndTokens"));
 			}
 
 
@@ -30,17 +43,31 @@ public class PlayerController : MonoBehaviour {
 		Vector2 screenPosition = Camera.main.WorldToScreenPoint (transform.position);
 		if (screenPosition.y > Screen.height || screenPosition.y < 0) 
 		{
-			Death();		
+			//Death();		
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		Death();
+		//Death();
 	}
 
+	void OnTriggerEnter2D(Collider2D col){
+		if(col.tag == "token"){
+			Unit += 1;
+			Debug.Log(Unit);
+		}
+	}
+
+	
 	void Death()
 	{
 		Application.LoadLevel ("GameOver");
 	}
+
+
+	void OnGui(){
+
+	}
+
 }

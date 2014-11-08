@@ -7,12 +7,12 @@ public class RenderSprite : MonoBehaviour {
 
 	SpriteRenderer spriteRenderer;
 
-	public float x;
-	public float y;
+	//public float x;
+	//public float y;
 	
 	// Use this for initialization
 	void Start (){
-		transform.position = new Vector3(x, y, -1.0f);
+		transform.position = new Vector3(GameObject.Find("Koi").transform.position.x, GameObject.Find("Koi").transform.position.y, -1.0f);
 		spriteRenderer = renderer as SpriteRenderer;
 	}
 	
