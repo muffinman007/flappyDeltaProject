@@ -8,7 +8,7 @@ public class UnitTokenRender : MonoBehaviour{
 
 	public int fps;
 	float timer = 0.0f;
-	public float timerLimit = 0.3f;		// time between each animation
+	public float timerLimit = 0.2f;		// time between each animation
 
 	public int playHowManyTime = 2;     // play the animation how many times
 	int playCounter = 0;

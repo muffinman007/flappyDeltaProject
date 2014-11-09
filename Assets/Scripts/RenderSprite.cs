@@ -3,7 +3,14 @@ using System.Collections;
 
 public class RenderSprite : MonoBehaviour {
 
-	public Sprite sprite;
+	public static bool startAnimation = false;
+	public static bool jump = false;
+
+	public Sprite[] sprites;
+	public float fps;
+	int numberOfFrames = 3;
+	int jumpFrame = 3;
+	int jumpLastHowManyFrames = 4;
 
 	SpriteRenderer spriteRenderer;
 
@@ -17,7 +24,38 @@ public class RenderSprite : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+	int indexState;
+	bool didRecordIndexState = false;
+	int count = 0;						
 	void Update (){
-		spriteRenderer.sprite = sprite;
+		if(startAnimation){
+			int index = (int)(Time.timeSinceLevelLoad * fps);
+			index = index % numberOfFrames;
+
+			if(jump){
+				if(!didRecordIndexState){
+					indexState = index;
+					didRecordIndexState = true;
+					spriteRenderer.sprite = sprites[jumpFrame];
+				}
+				// keep the jump frame time equal with the other frames' time
+				else if(indexState != index){
+					if( (++count) != jumpLastHowManyFrames )
+						indexState = index;
+					else{
+						count = 0;
+						jump = false;
+						didRecordIndexState = false;
+						spriteRenderer.sprite = sprites[index];
+					}
+				}
+				else
+					spriteRenderer.sprite = sprites[jumpFrame];
+			}
+			else
+				spriteRenderer.sprite = sprites[index];
+		}
+		else
+			spriteRenderer.sprite = sprites[0];
 	}
 }

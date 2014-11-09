@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BgController.cs" />
+     <Compile Include="Assets\Scripts\BuildingBgController.cs" />
      <Compile Include="Assets\Scripts\CollisionTrigger.cs" />
      <Compile Include="Assets\Scripts\DisplayUnits.cs" />
      <Compile Include="Assets\Scripts\EnvObjController.cs" />
@@ -56,7 +58,6 @@
      <Compile Include="Assets\Scripts\RenderSprite.cs" />
      <Compile Include="Assets\Scripts\TextureRes.cs" />
      <Compile Include="Assets\Scripts\UnitTokenRender.cs" />
-     <Compile Include="Assets\Scripts\bgController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

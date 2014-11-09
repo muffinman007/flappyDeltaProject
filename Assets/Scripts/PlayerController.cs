@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	float gravity = 1.58f;
 
 	bool isGeneratingBookToken = false;
-
+	bool startBuildingBgMovement = false;
 	void Start(){
 		Unit = 0;
 	}
@@ -36,7 +36,14 @@ public class PlayerController : MonoBehaviour {
 				Instantiate(Resources.Load<GameObject>("GenerateBooksAndTokens"));
 			}
 
+			if(!startBuildingBgMovement){
+				startBuildingBgMovement = true;
+				BuildingBgController.startMoving = true;
+				RenderSprite.startAnimation = true;
+			}
 
+			// the koi fish jump animation
+			RenderSprite.jump = true;
 		}
 
 		//die from falling off screen
@@ -55,7 +62,6 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 		if(col.tag == "token"){
 			Unit += 1;
-			Debug.Log(Unit);
 		}
 	}
 
@@ -66,8 +72,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 
-	void OnGui(){
 
-	}
 
 }
