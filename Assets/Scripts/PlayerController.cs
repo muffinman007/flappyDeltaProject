@@ -3,6 +3,11 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	public enum GamePlayMode{ EASY, NORMAL, KONAMI }
+	public static GamePlayMode gamePlayMode;
+
+	public int Lives{ get; private set; }
+
 	public int Unit{ get; private set; }
 
 	//The force that is added when the player jumps.
@@ -14,7 +19,24 @@ public class PlayerController : MonoBehaviour {
 	bool isGeneratingBookToken = false;
 	bool startBuildingBgMovement = false;
 	void Start(){
+		switch(gamePlayMode){
+			case GamePlayMode.EASY:
+				Lives = 5;
+				break;
+
+			case GamePlayMode.KONAMI:
+				Lives = 30;
+				break;
+
+			default:
+				Lives = 1;
+				break;
+		}
+
 		Unit = 0;
+
+		if(gamePlayMode != GamePlayMode.NORMAL)
+			Instantiate(Resources.Load<GameObject>("GuiRetake"));
 	}
 
 	// Update is called once per frame
@@ -50,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 		Vector2 screenPosition = Camera.main.WorldToScreenPoint (transform.position);
 		if (screenPosition.y > Screen.height || screenPosition.y < 0) 
 		{
-			//Death();		
+			LivesControl();
 		}
 	}
 
@@ -63,15 +85,24 @@ public class PlayerController : MonoBehaviour {
 		if(col.tag == "token"){
 			Unit += 1;
 		}
+
+		if(col.tag == "book")
+			LivesControl();
 	}
 
+	void LivesControl(){
+		--Lives;
+
+		if(Lives <= 0)
+			Death();
+	}
 	
 	void Death()
 	{
 		Application.LoadLevel ("GameOver");
 	}
 
-
+	
 
 
 }

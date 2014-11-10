@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\BgController.cs" />
      <Compile Include="Assets\Scripts\BuildingBgController.cs" />
      <Compile Include="Assets\Scripts\CollisionTrigger.cs" />
+     <Compile Include="Assets\Scripts\DisplayRetake.cs" />
      <Compile Include="Assets\Scripts\DisplayUnits.cs" />
      <Compile Include="Assets\Scripts\EnvObjController.cs" />
      <Compile Include="Assets\Scripts\GameOver.cs" />

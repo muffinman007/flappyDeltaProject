@@ -49,7 +49,7 @@ public class GenerateScript : MonoBehaviour {
 		// magic number 4.15 = (height of shinyToken.png * .25(scale) + height of the book sprit) * ratio of pixel to unity coordinate unit (about 0.01 for pixel)
 		//if( (Random.Range(0, 2)) == 0 )
 			Instantiate( Resources.Load<GameObject>("Token"), 
-						 new Vector3(transform.position.x, transform.position.y + y + token_yOffset - (4.15f + (distBetweenBooks/3.0f)), 0), 
+						 new Vector3(transform.position.x, transform.position.y + y + token_yOffset - (4.15f + (distBetweenBooks/3.2f)), 0), 
 						 Quaternion.identity);
 		//else
 			//Instantiate(aToken, 
