@@ -98,7 +98,8 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Death()
-	{
+	{	
+		GameOver.unit = Unit;
 		Application.LoadLevel ("GameOver");
 	}
 
