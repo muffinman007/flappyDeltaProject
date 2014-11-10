@@ -5,6 +5,7 @@ public class RenderSprite : MonoBehaviour {
 
 	public static bool startAnimation = false;
 	public static bool jump = false;
+	public static bool death = false;
 
 	public Sprite[] sprites;
 	public float fps;
@@ -28,34 +29,39 @@ public class RenderSprite : MonoBehaviour {
 	bool didRecordIndexState = false;
 	int count = 0;						
 	void Update (){
-		if(startAnimation){
-			int index = (int)(Time.timeSinceLevelLoad * fps);
-			index = index % numberOfFrames;
+		if(death){
+			spriteRenderer.sprite = sprites[jumpFrame];
+		}
+		else{
+			if(startAnimation){
+				int index = (int)(Time.timeSinceLevelLoad * fps);
+				index = index % numberOfFrames;
 
-			if(jump){
-				if(!didRecordIndexState){
-					indexState = index;
-					didRecordIndexState = true;
-					spriteRenderer.sprite = sprites[jumpFrame];
-				}
-				// keep the jump frame time equal with the other frames' time
-				else if(indexState != index){
-					if( (++count) != jumpLastHowManyFrames )
+				if(jump){
+					if(!didRecordIndexState){
 						indexState = index;
-					else{
-						count = 0;
-						jump = false;
-						didRecordIndexState = false;
-						spriteRenderer.sprite = sprites[index];
+						didRecordIndexState = true;
+						spriteRenderer.sprite = sprites[jumpFrame];
 					}
+					// keep the jump frame time equal with the other frames' time
+					else if(indexState != index){
+						if( (++count) != jumpLastHowManyFrames )
+							indexState = index;
+						else{
+							count = 0;
+							jump = false;
+							didRecordIndexState = false;
+							spriteRenderer.sprite = sprites[index];
+						}
+					}
+					else
+						spriteRenderer.sprite = sprites[jumpFrame];
 				}
 				else
-					spriteRenderer.sprite = sprites[jumpFrame];
+					spriteRenderer.sprite = sprites[index];
 			}
 			else
-				spriteRenderer.sprite = sprites[index];
+				spriteRenderer.sprite = sprites[0];
 		}
-		else
-			spriteRenderer.sprite = sprites[0];
 	}
 }

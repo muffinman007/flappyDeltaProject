@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public enum GamePlayMode{ EASY, NORMAL, KONAMI }
-	public static GamePlayMode gamePlayMode;
+	public static GamePlayMode gamePlayMode = GamePlayMode.NORMAL;
 
 	public int Lives{ get; private set; }
 
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 	bool isGeneratingBookToken = false;
 	bool startBuildingBgMovement = false;
 	void Start(){
+		RenderSprite.death = false;
 		switch(gamePlayMode){
 			case GamePlayMode.EASY:
 				Lives = 5;
@@ -39,40 +40,59 @@ public class PlayerController : MonoBehaviour {
 			Instantiate(Resources.Load<GameObject>("GuiRetake"));
 	}
 
+
+	float timer = 0.0f;
+	float timeTransitionToGameOver = 1.0f;
+	float timerStart;
+	bool recordTimeStart = true;
+
 	// Update is called once per frame
 	void Update () 
-	{
-		//jumping
-		if (Input.GetKeyUp ("space")) 
-		{
-			rigidbody2D.velocity = Vector2.zero;
-			rigidbody2D.AddForce (jumpForce);
+	{		
+		if(!noMoreLives){
+			//jumping
+			if (Input.GetKeyUp ("space")) 
+			{
+				rigidbody2D.velocity = Vector2.zero;
+				rigidbody2D.AddForce (jumpForce);
 
-			if(!gravityOn){
-				gravityOn = true;
-				rigidbody2D.gravityScale = gravity;
+				if(!gravityOn){
+					gravityOn = true;
+					rigidbody2D.gravityScale = gravity;
+				}
+
+				if(!isGeneratingBookToken){
+					isGeneratingBookToken = true;
+					Instantiate(Resources.Load<GameObject>("GenerateBooksAndTokens"));
+				}
+
+				if(!startBuildingBgMovement){
+					startBuildingBgMovement = true;
+					BuildingBgController.startMoving = true;
+					RenderSprite.startAnimation = true;
+				}
+
+				// the koi fish jump animation
+				RenderSprite.jump = true;
 			}
 
-			if(!isGeneratingBookToken){
-				isGeneratingBookToken = true;
-				Instantiate(Resources.Load<GameObject>("GenerateBooksAndTokens"));
+			//die from falling off screen
+			Vector2 screenPosition = Camera.main.WorldToScreenPoint (transform.position);
+			if (screenPosition.y > Screen.height || screenPosition.y < 0) 
+			{
+				LivesControl();
 			}
-
-			if(!startBuildingBgMovement){
-				startBuildingBgMovement = true;
-				BuildingBgController.startMoving = true;
-				RenderSprite.startAnimation = true;
-			}
-
-			// the koi fish jump animation
-			RenderSprite.jump = true;
 		}
+		else{
+			if(recordTimeStart){
+				timerStart = Time.realtimeSinceStartup / 1000.0f;
+				recordTimeStart = false;
+			}
 
-		//die from falling off screen
-		Vector2 screenPosition = Camera.main.WorldToScreenPoint (transform.position);
-		if (screenPosition.y > Screen.height || screenPosition.y < 0) 
-		{
-			LivesControl();
+			timer += (Time.realtimeSinceStartup/1000.0f) - timerStart;
+
+			if(timer >= timeTransitionToGameOver)
+				Death();
 		}
 	}
 
@@ -90,15 +110,23 @@ public class PlayerController : MonoBehaviour {
 			LivesControl();
 	}
 
+	bool noMoreLives = false;
 	void LivesControl(){
 		--Lives;
 
-		if(Lives <= 0)
-			Death();
+		if(Lives <= 0){
+			Lives = 0;
+			RenderSprite.death = true;
+			noMoreLives = true;
+		}
 	}
 	
 	void Death()
 	{	
+		isGeneratingBookToken = false;
+		startBuildingBgMovement = false;
+		BuildingBgController.startMoving = false;
+		RenderSprite.startAnimation = false;
 		GameOver.unit = Unit;
 		Application.LoadLevel ("GameOver");
 	}
