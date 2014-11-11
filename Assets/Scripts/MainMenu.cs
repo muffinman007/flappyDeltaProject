@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour {
 
 		GUI.skin = skin;
 
-		GUI.Label(new Rect( 80,
+		GUI.Label(new Rect( 140,
 			                10,
 			                GameObject.Find("Main Camera").camera.pixelWidth - 20,
 			                50),
@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour {
 			        	   skin.GetStyle("title"));
 
 		// easy play
-		if(GUI.Button(new Rect( 40, 210,
+		if(GUI.Button(new Rect( 40, 260,
 		                        120, GameObject.Find("Main Camera").camera.pixelHeight/15),
 		               			"Easy Play", skin.GetStyle("buttonBackground"))){
 			if(!codeActiviated)
@@ -63,7 +63,7 @@ public class MainMenu : MonoBehaviour {
 		}
 
 		// normal play
-		if(GUI.Button(new Rect( 40, 210 + (GameObject.Find("Main Camera").camera.pixelHeight/15) + 10,
+		if(GUI.Button(new Rect( 40, 260 + (GameObject.Find("Main Camera").camera.pixelHeight/15) + 10,
 		                        120, GameObject.Find("Main Camera").camera.pixelHeight/15),
 		               			"Normal Play", skin.GetStyle("buttonBackground"))){
 			if(!codeActiviated)
@@ -72,12 +72,12 @@ public class MainMenu : MonoBehaviour {
 		}
 
 		
-		if(GUI.Button(new Rect( 350, 340,
+		if(GUI.Button(new Rect( 470, 415,
 		                        120, GameObject.Find("Main Camera").camera.pixelHeight/15),
 								"Quit",	skin.GetStyle("buttonBackground")))
 			Application.Quit();
 
-		if(GUI.Button(new Rect( 350, 210,
+		if(GUI.Button(new Rect( 470, 260,
 		                        120, GameObject.Find("Main Camera").camera.pixelHeight/15),
 								"Credit", skin.GetStyle("buttonBackground")))
 			Application.LoadLevel("Credit");

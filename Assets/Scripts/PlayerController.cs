@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	float timer = 0.0f;
-	float timeTransitionToGameOver = 1.0f;
+	float timeTransitionToGameOver = 0.9f;
 	float timerStart;
 	bool recordTimeStart = true;
 

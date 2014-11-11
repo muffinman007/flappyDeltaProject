@@ -7,8 +7,8 @@ public class GameOver : MonoBehaviour {
 	public static int unit;
 
 	float timer = 0.0f;
-	float timePaused = 2.0f;
-	float showButtonTime = 2.5f;
+	float timePaused = .70f;
+	float showButtonTime = 1.5f;
 	bool setTimer = true;
 
 	bool showText = false;
