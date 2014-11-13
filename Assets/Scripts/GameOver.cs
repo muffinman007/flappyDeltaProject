@@ -56,14 +56,14 @@ public class GameOver : MonoBehaviour {
 
 		if(showButton){
 			// normal play
-			if(GUI.Button(new Rect( GameObject.Find("Main Camera").camera.pixelWidth/12, 335,
+			if(GUI.Button(new Rect( GameObject.Find("Main Camera").camera.pixelWidth/12, 300,
 									120, GameObject.Find("Main Camera").camera.pixelHeight/15),
 		               				"Play Again", skin.GetStyle("buttonBackground"))){
 				Application.LoadLevel("MainMenu");
 			}
 
 		
-			if(GUI.Button(new Rect( GameObject.Find("Main Camera").camera.pixelWidth - (GameObject.Find("Main Camera").camera.pixelWidth/12) - 120, 335,
+			if(GUI.Button(new Rect( GameObject.Find("Main Camera").camera.pixelWidth - (GameObject.Find("Main Camera").camera.pixelWidth/12) - 120, 300,
 									120, GameObject.Find("Main Camera").camera.pixelHeight/15),
 									"Quit",	skin.GetStyle("buttonBackground")))
 				Application.Quit();
